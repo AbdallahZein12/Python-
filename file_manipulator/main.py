@@ -5,7 +5,7 @@ lin = l.readlines()
 try:
   lin[0] == 'Initials   :   Score\n\n' 
 except:
-  f.write('Initials   :   Score\n\n')
+  lin[0] = "Initials   :   Score\n\n"
 def main():
   inputs = {
     'initials':None, 'score':None
