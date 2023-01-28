@@ -3,9 +3,15 @@ f = open('high.score.txt', 'a+')
 l = open('high.score.txt','r')
 lin = l.readlines()
 try:
-  lin[0] == 'Initials   :   Score\n\n' 
+  if lin[0] != 'Initials   :   Score\n\n':
+    lin[0] = 'Initials   :   Score\n\n'
+    l.close()
+    l = open('high.score.txt','w')
+    l.writelines(lin)
+    l.close()
 except:
-  lin[0] = "Initials   :   Score\n\n"
+  f.write('Initials   :   Score\n\n')
+
 def main():
   inputs = {
     'initials':None, 'score':None
@@ -80,5 +86,4 @@ main()
     
 
   
-
 
