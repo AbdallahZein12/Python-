@@ -1,9 +1,13 @@
 import os,time
+def check_list(lst):
+  for char in lst:
+    if char.isdigit():
+      return True
 f = open('high.score.txt', 'a+')
 l = open('high.score.txt','r')
 lin = l.readlines()
 try:
-  if lin[0] != 'Initials   :   Score\n\n':
+  if lin[0] != 'Initials   :   Score\n':
     lin[0] = 'Initials   :   Score\n\n'
     l.close()
     l = open('high.score.txt','w')
@@ -21,11 +25,26 @@ def main():
       print()
       inputs[i] = input(f"Input your {i}> ")
       if i == 'initials':
-        try: 
-          initi = str(inputs[i])
-          break
-        except:
+        if len(inputs[i]) > 3:
+          print()
+          print('\033[31m','Error, make sure initials are less than 3!','\033[0m')
           continue
+        ans = check_list(inputs[i])
+        if ans == True:
+          print()
+          print('\033[31m','Error, please try again!','\033[0m')
+          continue
+        else:
+          break
+               
+        
+        
+            
+        
+          
+
+    
+
       elif i == 'score':
         try:
           sc = int(inputs[i])
