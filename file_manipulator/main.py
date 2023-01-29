@@ -1,4 +1,5 @@
 import os,time
+print('\033[33m',end='')
 def check_list(lst):
   for char in lst:
     if char.isdigit():
@@ -27,12 +28,12 @@ def main():
       if i == 'initials':
         if len(inputs[i]) > 3:
           print()
-          print('\033[31m','Error, make sure initials are less than 3!','\033[0m')
+          print('\033[31m','Error, make sure initials are less than 3!','\033[33m')
           continue
         ans = check_list(inputs[i])
         if ans == True:
           print()
-          print('\033[31m','Error, please try again!','\033[0m')
+          print('\033[31m','Error, please try again!','\033[33m')
           continue
         else:
           break
@@ -50,12 +51,12 @@ def main():
           sc = int(inputs[i])
         except:
           print()
-          print('\033[31m','Error, please try again!','\033[0m')
+          print('\033[31m','Error, please try again!','\033[33m')
           print()
           continue
         if sc > 100000:
           print()
-          print('\033[31m','Error, please try again!','\033[0m')
+          print('\033[31m','Error, please try again!','\033[33m')
           print()
           continue
         else:
@@ -81,7 +82,7 @@ def main():
           main()
         else:
           print()
-          print('\033[31m','Error, please try again!','\033[0m')
+          print('\033[31m','Error, please try again!','\033[33m')
           print()
           continue
       
