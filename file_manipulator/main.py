@@ -18,6 +18,7 @@ except:
   f.write('Initials   :   Score\n\n')
 
 def main():
+  os.system('cls')
   inputs = {
     'initials':None, 'score':None
   }
@@ -88,7 +89,7 @@ def main():
       
 
 main()       
-        
+f.close()
         
   # if inputs[1] > 100000:
   #   print()
