@@ -1,10 +1,14 @@
 import os, time, random, sys
 
 main_list = []
-
-f = open("calendar.txt", "r")
-main_list = eval(f.read())
-f.close()
+while True: 
+    try:
+        f = open("calendar.txt", "r")
+        main_list = eval(f.read())
+        f.close()
+        break
+    except:
+        break
 
 
 def colors(col):
