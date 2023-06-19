@@ -60,3 +60,4 @@ for value in [3,41,12,9,74,15]:
         smallest = value
     print(smallest,value)
 print("After", smallest)
+
