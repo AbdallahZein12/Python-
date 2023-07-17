@@ -97,9 +97,9 @@ print(b)
 
 
 print()
-print("-----LISTS-----")
+print("-----TUPLES-----")
 print()
-# Tuple: orderedm immutable, allows duplicate elements.
+# Tuple: ordered immutable, allows duplicate elements.
 mytuple = ("Max", 28, "Boston")
 mytuple = "Max", 28, "Boston"
 mytuple = ("Max",)
@@ -222,3 +222,201 @@ mytuple = (8, 7)
 mydict = {mytuple: 15}
 
 print(mydict)
+
+
+
+
+
+print()
+print("-----SETS-----")
+print()
+
+#Sets: Unordered, mutable, no duplicates
+
+
+myset = {1,2,3,1,2}
+print(myset)
+
+myset = set([1,2,3])
+myset = set("Hello")
+
+myset = set()
+
+myset.add(1)
+myset.add(2)
+myset.add(3)
+print(myset)
+
+myset.remove(3)
+print(myset)
+
+myset.discard(3)
+
+print(myset.pop())
+print(myset)
+
+for i in myset:
+    print(i)
+
+print(myset)
+if 2 in myset:
+    print("Yes")
+    
+odds = {1,3,5,7,9}
+evens = {0,2,4,6,8}
+primes = {2,3,5,7}
+
+u = odds.union(evens)
+print(u)
+
+i = odds.intersection(primes)
+print(i)
+
+i = evens.intersection(primes)
+print(i)
+
+setA = {1,2,3,4,5,6,7,8,9}
+setB = {1,2,3,10,11,12}
+diff = setA.difference(setB)
+print(diff)
+
+diff = setB.difference(setA)
+print(diff)
+
+diff = setA.symmetric_difference(setB)
+print(diff)
+
+diff = setB.symmetric_difference(setA)
+print(diff)
+
+setA.update(setB)
+print(setA)
+
+setA.intersection_update(setB)
+print(setA)
+
+setA.difference_update(setB)
+print(setA)
+
+setA.symmetric_difference_update(setB)
+print(setA)
+
+print(setA.issubset(setB))
+
+print(setB.issuperset(setA))
+
+print(setA.isdisjoint(setB))
+
+setB = setA.copy()
+setB = set(setA)
+
+a = frozenset([1,2,3,4])
+
+
+myset.clear()
+
+
+print()
+print("-----STRINGS-----")
+print()
+#Strings: ordered, immutable, text representation 
+
+my_string = "Hello World"
+print(my_string)
+my_string = 'Hello World'
+print(my_string)
+my_string = 'I\'m a programmer'
+print(my_string)
+my_string = "I'm a programmer"
+print(my_string)
+my_string = """Hello 
+World"""
+print(my_string)
+my_string = """Hello \
+World"""
+print(my_string)
+my_string = "Hello World"
+char = my_string[1]
+print(char)
+char = my_string[-1]
+print(char)
+substring = my_string[1:5]
+print(substring)
+substring = my_string[::-1]
+print(substring)
+greeting = "Hello"
+name = "Tom"
+sentence = greeting + " " + name
+print(sentence)
+for i in greeting:
+    print(i)
+if 'ell' in greeting:
+    print("Yes")
+else:
+    print("No")
+
+my_string = '   Hello World    '
+my_string = my_string.strip()
+print(my_string)
+
+print(my_string.upper())
+print(my_string.lower())
+print(my_string.startswith('H'))
+print(my_string.startswith('Hello'))
+print(my_string.endswith('World'))
+print(my_string.find('lo'))
+print(my_string.find('pp'))
+print(my_string.count('o'))
+print(my_string.count('p'))
+print(my_string.replace('World','Universe'))
+print(my_string.replace('Worrrrld','Universe'))
+my_string = "how are you doing"
+my_list = my_string.split()
+print(my_list)
+my_string = "how,are,you,doing"
+my_list = my_string.split(",")
+print(my_list)
+new_string = " ".join(my_list)
+print(new_string)
+
+from timeit import default_timer as timer   
+
+#BAD CODE BC IT CREATES A NEW STRING EVERYTIME SINCE STRINGS ARE IMMUTABLE. EXPENSIVE OPERATION
+my_list = ['a'] * 100000
+
+start = timer()
+my_string = ''
+for i in my_list:
+    my_string += i
+stop = timer()
+print(stop-start)
+
+#GOOD CODE 
+start = timer()
+my_string = "".join(my_list)
+stop = timer()
+print(stop-start)
+
+var = "Tom"
+my_string = "The variable is %s" % var
+print(my_string)
+var = 1
+my_string = "The variable is %d" % var
+print(my_string)
+var = 1.122313
+my_string = "The variable is %f" % var
+print(my_string)
+var = 1.122313
+my_string = "The variable is %.2f" % var
+print(my_string)
+var = 1.122313
+my_string = "The variable is {}".format(var)
+print(my_string)
+var = 1.122313
+var2 = 6
+my_string = "The variable is {:.2f} and {}".format(var, var2)
+print(my_string)
+var = 1.122313
+var2 = 6
+my_string = f"The variable is {var*2} and {var2}"
+print(my_string)
