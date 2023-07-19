@@ -420,3 +420,77 @@ var = 1.122313
 var2 = 6
 my_string = f"The variable is {var*2} and {var2}"
 print(my_string)
+
+
+print()
+print("-----COLLECTIONS-----")
+print()
+
+# Collections: Counter, namedtuple, OrderedDict, defaultdict, deque
+from collections import Counter, namedtuple, OrderedDict, defaultdict, deque
+
+a = "aaaaaabbbbccc"
+
+mycounter = Counter(a)
+print(mycounter.keys())
+print(mycounter.values())
+print(mycounter.items())
+print(mycounter.most_common(2))
+print(mycounter.most_common(1)[0][0])
+print(list(mycounter.elements()))
+
+Point = namedtuple('Point','x,y')
+pt = Point(1,-4)
+print(pt)
+print(pt.x, pt.y)
+
+ordered_dict = OrderedDict()
+ordered_dict['a'] = 1
+ordered_dict['b'] = 2
+ordered_dict['c'] = 3
+ordered_dict['d'] = 4
+
+print(ordered_dict)
+
+default_dict = defaultdict(bool)
+default_dict['a'] = 1
+default_dict['b'] = 2
+print(default_dict['c'])
+
+d = deque()
+d.append(1)
+d.append(2)
+print(d)
+
+d.appendleft(3)
+print(d)
+
+d.pop()
+print(d)
+
+d.popleft()
+print(d)
+
+d.extend([4,5,6])
+print(d)
+
+d.extendleft([4,5,6])
+print(d)
+
+d.rotate(2)
+print(d)
+d.rotate(-1)
+print(d)
+
+
+
+
+
+
+
+
+
+
+
+
+
