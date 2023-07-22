@@ -552,4 +552,142 @@ a = [1,2,3]
     
 for i in repeat(1, 4):
     print(i)
+    
+print()
+print("-----LAMBDA-----")
+print()
 
+# Small one line anonymous function 
+# lambda arguments: expression
+
+add10 = lambda x: x + 10
+print(add10(5))
+
+def add10_func(x):
+    return x + 10
+
+mult = lambda x,y: x * y
+print(mult(2,7))
+
+points2D = [(1,2),(15,1), (5,-1), (10,4)]
+points2D_sorted = sorted(points2D)
+
+print(points2D)
+print(points2D_sorted)
+
+
+points2D = [(1,2),(15,1), (5,-1), (10,4)]
+
+def sort_by_y(x):
+    return x[1]
+
+points2D_sorted = sorted(points2D, key=lambda x: x[1])
+points2D_sorted = sorted(points2D, key=sort_by_y)
+
+print(points2D)
+print(points2D_sorted)
+
+points2D_sorted = sorted(points2D, key=lambda x: x[0] + x[1])
+print(points2D_sorted)
+
+#map(func, seq)
+
+a = [1,2,3,4,5]
+b = map(lambda x: x*2, a)
+print(list(b))
+
+c = [x*2 for x in a]
+print(c)
+
+#filter(func(true or false), seq)
+a = [1,2,3,4,5,6]
+b = filter(lambda x: x%2==0,a)
+print(list(b))
+b = [x for x in a if x % 2==0]
+print(b)
+
+#reduce(func, seq)
+from functools import reduce
+a = [1,2,3,4]
+prod_a = reduce(lambda x,y: x*y,a)
+print(prod_a)
+
+print()
+print("-----EXCEPTIONS-----")
+print()
+
+# Errors and Exceptions 
+
+# A python program terminates as soon as it encounters an error
+# An error can be either a syntax error or an exception 
+
+# a = 5 print(a)    Syntax Error!!
+
+a = 5
+# print(a))    Syntax Error!!
+
+# a = 5 + "10"    Type Error!!
+
+# import somemodule     Import Error!!
+
+a = 5
+# b = c      Name Error!!
+
+# f = open('somefile.txt')     FileNotFound Error!!
+
+a = [1,2,3]
+# a.remove(4)     Value Error!!
+
+# a[4]        Index Error!!
+
+my_dict = {'name':'Max'}
+
+# my_dict['age']          Key Error!!
+
+x = 5
+
+if x < 0:
+    raise Exception('x should be positive')
+
+assert(x>=0), 'x is not positive'
+
+try:
+    a = 5 / 0
+except Exception as e:
+    print('An error has occured --> ', e)
+
+try:
+    a = 5 / 1
+    b = a + '10'
+except ZeroDivisionError as e:
+    print(e)
+except TypeError as e:
+    print(e)
+else:
+    print('Everything is fine')
+finally:
+    print('Cleaning up...')
+
+
+class ValueTooHighError(Exception):
+    pass
+
+class ValueTooSmallError(Exception):
+    def __init__(self,message,value):
+        self.message = message
+        self.value = value
+        
+
+# def test_value(x):
+#     if x > 100:
+#         raise ValueTooHighError('Value is too high')
+#     if x < 5:
+#         return ValueTooSmallError('Value is too small',x)
+# test_value(200)
+
+# try:
+#     test_value(200)
+# except ValueTooHighError as e:
+#     print(e)
+# except ValueTooSmallError as e:
+#     print(e.message,e.value)
