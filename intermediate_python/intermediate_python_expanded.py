@@ -862,3 +862,99 @@ def decode_user(dct):
 
 user = json.loads(userJSON, object_hook=decode_user)
 print(user.name)
+
+
+print()
+print("-----RANDOM NUMBERS-----")
+print()
+
+# Python comes with different built in modules to generate random numbers.
+# Random module = for pseudo random numbers
+# the Secrets Module = for cryptographically strong random numbers
+# the NumPy random module = to generate arrays of random numbers
+
+import random # called psuedo random bc numbers seem random but they are reproducable
+
+a = random.random() # random float from 0-1
+print(a)
+
+a = random.uniform(1,10) # random float from a range
+print(a)
+
+a = random.randint(1,10) # random int between 1-10 but includes upper bound value
+print(a)  
+
+a = random.randrange(1,10) # random int between 1-10 but does not include upper bound value
+print(a)
+
+a = random.normalvariate(mu=0,sigma=1) # mu and a sigma - picks a random value from a normal distribution 
+# with a mean of zero and the standard deviation of 1
+print(a)
+
+mylist = list('ABCDEFG')
+print(mylist)
+
+a = random.choice(mylist) # picks random element from list
+print(a)
+
+a = random.sample(mylist, 3) # picks 3 unique elements randomly
+print(a)
+
+a = random.choices(mylist,k=3) # picks 3 elements from the list randomly but may repeat
+print(a)
+
+random.shuffle(mylist) # randomly shuffles a list in place
+print(mylist)
+
+random.seed(1)
+
+print(random.random())
+print(random.randint(1,10))
+random.seed(1)
+print(random.random())
+print(random.randint(1,10))
+
+# random module not recommended for security bc it is reproducable with these seeds
+
+import secrets
+# used for passwords, sec tokens, or acc auth
+# disadvantage is that algos take more time but they will generate
+# true random nums
+# only has 3 functions
+
+a = secrets.randbelow(10) # random int from 0-10 and 10 is not included
+print(a)
+
+a = secrets.randbits(4) # returns an int with K random bits
+# 1010  (will have 4 different random binary values)
+print(a)
+
+mylist = list("ABCDEFGH")
+a = secrets.choice(mylist) # picks a random choice that is not reproducable
+print(a)
+
+
+import numpy as np
+
+a = np.random.rand(3) # 1d array with 3 random floats
+print(a)
+
+a = np.random.rand(3,3) # 3 by 3 array with 3 random floats in each
+print(a)
+
+a = np.random.randint(0,10, 3) # from 0-10  (10 is excluded)  with size 3 (1d array)
+print(a)
+
+a = np.random.randint(0,10, (3,4)) # from 0-10  (10 is excluded)  with size 3 by 4 array
+print(a)
+
+arr = np.array([[1,2,3],[4,5,6],[7,8,9]])
+print(arr)
+np.random.shuffle(arr) # will only shuffle elements along our 
+# first axis so this will never switch elements in between but only 
+# switch elements in the first axis 
+print(arr)
+
+# note: numpy random generator uses a different number generator than the 
+# one from the Python standard library and also has a different seed function
+# np.random.seed(1)
