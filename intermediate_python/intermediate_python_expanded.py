@@ -6,6 +6,9 @@ print()
 myList = ["banana","cherry","apple"]
 print(myList)
 
+
+
+
 myList2 = list()
 print(myList2)
 
@@ -167,7 +170,7 @@ print(timeit.timeit(stmt="(0,1,2,3,4,5)", number=1000000))
 
 print()
 print("-----DICTIONARIES-----")
-print()
+print() 
 
 #Dictionaries: Key-Value pairs, Unordered, Mutable
 
@@ -1111,3 +1114,85 @@ def say_hello():
     
 say_hello()
 say_hello()
+
+
+print()
+print("-----Generators-----")
+print()
+
+# Functions that return an object that can be iterated over
+
+def  mygenerator():
+    yield 3
+    yield 2
+    yield 1
+    
+g = mygenerator()
+
+# print(sorted(g))
+
+# print(sum(g))
+
+value = next(g)
+print(value)
+
+value = next(g)
+print(value)
+
+value = next(g)
+print(value)
+
+def countdown(num):
+    print("Starting")
+    while num > 0:
+        yield num
+        num -= 1
+
+cd = countdown(4)
+
+value = next(cd)
+
+print(value)
+print(next(cd))
+print(next(cd))
+print(next(cd))
+
+import sys 
+def firstn(n):
+    nums = []
+    num = 0
+    while num < n:
+        nums.append(num)
+        num+=1
+    return nums
+
+def firstn_generator(n):
+    num = 0
+    while num < n:
+        yield num
+        num += 1
+        
+print(sys.getsizeof(firstn(10000)))
+print(sys.getsizeof(firstn_generator(10000)))
+
+
+def fibonacci(limit):
+    # 0  1  1  2  3  5  8  13
+    a, b = 0, 1
+    while a < limit:
+        yield a 
+        a, b = b, a + b
+        
+fib = fibonacci(30)
+for i in fib:
+    print(i)
+
+import sys
+mygenerator = (i for i in range(1000) if i % 2 == 0)
+# for i in mygenerator:
+    # print(i)
+print(sys.getsizeof(mygenerator))
+    
+mylist = [i for i in range(1000) if i % 2 == 0]
+# print(mylist)
+print(sys.getsizeof(mylist))
