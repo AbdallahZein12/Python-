@@ -1196,3 +1196,112 @@ print(sys.getsizeof(mygenerator))
 mylist = [i for i in range(1000) if i % 2 == 0]
 # print(mylist)
 print(sys.getsizeof(mylist))
+
+print()
+print("-----Threading vs Multiprocessing-----")
+print()
+
+"""
+===PROCESS===
+
+A Process is an instance of a program, e.g. a Python interpreter. They are independent from each other and do not share the same memory.
+
+Key facts:
+
+A new process is started independently from the first process
+
+Takes advantage of multiple CPUs and cores
+
+Separate memory space
+
+Memory is not shared between processes
+
+One GIL (Global interpreter lock) for each process, i.e. avoids GIL limitation
+
+Great for CPU-bound processing
+
+Child processes are interruptable/killable
+
+Starting a process is slower that starting a thread
+
+Larger memory footprint
+
+IPC (inter-process communication) is more complicated
+
+
+===THREADS===
+
+
+A thread is an entity within a process that can be scheduled for execution (Also known as "leightweight process"). A Process can spawn multiple threads. The main difference is that all threads within a process share the same memory.
+
+Key facts:
+
+Multiple threads can be spawned within one process
+
+Memory is shared between all threads
+
+Starting a thread is faster than starting a process
+
+Great for I/O-bound tasks
+
+Leightweight - low memory footprint
+
+One GIL for all threads, i.e. threads are limited by GIL
+
+Multithreading has no effect for CPU-bound tasks due to the GIL
+
+Not interruptible/killable -> be careful with memory leaks
+
+increased potential for race conditions
+"""
+
+
+from multiprocessing import Process
+import os
+
+def square_numbers():
+    for i in range(100):
+        i * i
+
+
+processes = []
+num_processes = os.cpu_count()
+
+# create processes
+
+for i in range(num_processes):
+    p = Process(target=square_numbers)
+    processes.append(p)
+    
+for p in processes:
+    p.start()
+    
+for p in processes:
+    p.join()
+    
+print('end main')
+
+
+from threading import Thread
+
+def square_numbers():
+    for i in range(100):
+        i * i
+
+
+threads = []
+num_threads = 10
+
+# create threads
+
+for i in range(num_threads):
+    t = Thread(target=square_numbers)
+    threads.append(t)
+    
+for t in threads:
+    t.start()
+    
+for t in threads:
+    t.join()
+    
+print('end main')
