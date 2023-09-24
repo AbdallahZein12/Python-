@@ -1305,3 +1305,70 @@ for t in threads:
     t.join()
     
 print('end main')
+
+print()
+print("-----Threading-----")
+print()
+
+from threading import Thread
+
+
+def square_numbers():
+    for i in range(100):
+        i * i
+        
+if __name__ == "__main__":
+    threads = []
+    num_threads = 10
+    
+    # Create Threads
+    for i in range(num_threads):
+        t = Thread(target=square_numbers)
+        threads.append(t)
+        
+    # Start Threads
+    for i in threads:
+        i.start()
+        
+    # Join threads: wait for them to complete
+    for i in threads:
+        i.join()
+        
+    print('end main')
+    
+    
+import time
+from threading import Thread, Lock
+from queue import Queue
+
+database_value = 0
+
+def increase(lock):
+    global database_value
+    
+    with lock:
+        local_copy = database_value
+        
+        # processing
+        local_copy += 1
+        time.sleep(0.1)
+        
+        database_value = local_copy
+    
+        
+if __name__ == "__main__":
+    lock = Lock()
+    print('start value: ', database_value)
+    
+    thread1 = Thread(target=increase, args=(lock,))
+    thread2 = Thread(target=increase, args=(lock,))
+    
+    thread1.start()
+    thread2.start()
+    
+    thread1.join()
+    thread2.join()
+    
+    print('end value: ', database_value)
+        
+    print('end main')
