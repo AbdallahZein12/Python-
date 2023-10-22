@@ -495,7 +495,7 @@ print()
 from itertools import product, permutations, combinations, combinations_with_replacement, accumulate, groupby, count, cycle, repeat
 import operator
 a = [1,2]
-b = [3,4]
+b = [3,4] 
 prod = product(a,b)
 print(list(prod))
 a = [1,2]
