@@ -4,6 +4,7 @@ import ctypes
 import os 
 import bcrypt
 import base64
+import sqlite3
 
 class Expense:
     def __init__(self, name, category, amount) -> None:
@@ -32,41 +33,21 @@ def check_password(password,hashed_pw):
     return bcrypt.checkpw(password.encode('utf-8'),hashed_pw)
 
 
-def retrieve_users(file_path='creds.json'):
-    if os.path.exists(file_path):
-        with open(file_path,'r') as f:
-            try:
-                d = json.load(f)
-                if not isinstance(d,dict):
-                    d = {}
-            except json.JSONDecodeError:
-                d = {}
-        return d 
-    else:
-        return {}
+def retrieve_users(file_path='creds.db'):
+    conn = sqlite3.connect(file_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+    conn.close()
+    users = {i[0]:i[1] for i in users}
+    return users 
 
-def dump_user(data,file_path = 'creds.json'):
-    # with open('creds.json','w') as f:
-    #     json.dump(data,f,indent=4)
-    
-    if not os.path.exists('creds.json'):
-        with open(file_path,'w') as f:
-            json.dump({data[0]:data[1]},f, indent=4)
-        # if os.name == 'nt':
-        #     os.chmod(file_path, 0o666)
-        #     FILE_ATTRIBUTE_HIDDEN = 0x02
-        #     ctypes.windll.kernel32.SetFileAttributesW('creds.json',FILE_ATTRIBUTE_HIDDEN)
-        # else:
-        #     hidden_path = os.path.join('.','creds.json')
-        #     os.rename('creds.json',hidden_path)
-        return 
-    
-    d = retrieve_users()
-    
-    d[data[0]] = data[1]
-    
-    with open(file_path,'w') as f:
-        json.dump(d,f,indent=4)
+def dump_user(data,file_path='creds.db'):
+    conn = sqlite3.connect(file_path)
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (data[0], data[1]))
+    conn.commit()
+    conn.close()
                 
           
     
