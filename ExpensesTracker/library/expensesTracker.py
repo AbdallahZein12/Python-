@@ -112,7 +112,7 @@ def summarize_expenses(expense_file_path, budget):
     remaining_days = days_in_month - now.day
 
 
-    daily_budget = remaining_budget / remaining_days
+    daily_budget = remaining_budget / remaining_days if remaining_days else 1
         #    print(green(f" Budget Per Day: ${daily_budget:.2f}"))
 
     return {'amount_by_category':amount_by_category,
